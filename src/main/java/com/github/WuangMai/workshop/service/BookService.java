@@ -6,14 +6,21 @@ import com.github.WuangMai.workshop.repository.MockBookRepo;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @Primary
 @Component
+@Transactional
 public class BookService implements MockBookRepo {
 
     private final BookRepo bookRepo;
+
+    @PersistenceContext
+    protected EntityManager em;
 
     public BookService(BookRepo bookRepo) {
         this.bookRepo = bookRepo;
@@ -41,15 +48,8 @@ public class BookService implements MockBookRepo {
     }
 
     @Override
-    public void update(Book book) {
-
+    public Book update(Book book) {
+        return bookRepo.save(book);
     }
 
-//    @Override
-//    public void update(Book book) {
-//        if (this.get(book.getId()).isPresent()) {
-//            int indexOf = books.indexOf(this.get(book.getId()).get());
-////            bookRepo.
-//        }
-//    }
 }

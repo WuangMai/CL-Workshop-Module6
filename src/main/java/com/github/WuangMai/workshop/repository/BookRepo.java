@@ -8,12 +8,4 @@ import java.util.List;
 
 @Repository
 public interface BookRepo extends JpaRepository<Book, Long> {
-
-//    List<Book> findAll();
-//
-//    Book findBookById(Long id);
-//
-//    void delete(Long id);
-//
-//    void update(Book book);
 }

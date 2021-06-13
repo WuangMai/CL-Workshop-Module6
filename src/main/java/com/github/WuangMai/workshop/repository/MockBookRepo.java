@@ -12,5 +12,5 @@ public interface MockBookRepo {
 
     void delete(Long id);
 
-    void update(Book book);
+    Book update(Book book);
 }

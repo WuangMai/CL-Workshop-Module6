@@ -1,7 +1,6 @@
 package com.github.WuangMai.workshop.service;
 
 import com.github.WuangMai.workshop.model.Book;
-import com.github.WuangMai.workshop.repository.BookRepo;
 import com.github.WuangMai.workshop.repository.MockBookRepo;
 import lombok.Getter;
 import lombok.Setter;
@@ -48,11 +47,12 @@ public class MockBookService implements MockBookRepo {
     }
 
     @Override
-    public void update(Book book) {
+    public Book update(Book book) {
         if (this.get(book.getId()).isPresent()) {
             int indexOf = books.indexOf(this.get(book.getId()).get());
             books.set(indexOf, book);
         }
+        return book;
     }
 
 }
