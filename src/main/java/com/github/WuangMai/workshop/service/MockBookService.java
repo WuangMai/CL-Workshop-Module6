@@ -2,6 +2,7 @@ package com.github.WuangMai.workshop.service;
 
 import com.github.WuangMai.workshop.model.Book;
 import com.github.WuangMai.workshop.repository.BookRepo;
+import com.github.WuangMai.workshop.repository.MockBookRepo;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +16,7 @@ import java.util.Optional;
 @Setter
 @ToString
 @Component
-public class MockBookService {
+public class MockBookService implements MockBookRepo {
     private List<Book> books;
     private static Long nextId = 4L;
 
@@ -28,21 +29,25 @@ public class MockBookService {
                 "programming"));
     }
 
+    @Override
     public void add(Book book){
         book.setId(nextId++);
         books.add(book);
     }
 
+    @Override
     public Optional<Book> get(Long id) {
         return books.stream().filter(item -> item.getId().equals(id)).findFirst();
     }
 
+    @Override
     public void delete(Long id) {
         if (get(id).isPresent()) {
             books.remove(this.get(id).get());
         }
     }
 
+    @Override
     public void update(Book book) {
         if (this.get(book.getId()).isPresent()) {
             int indexOf = books.indexOf(this.get(book.getId()).get());
